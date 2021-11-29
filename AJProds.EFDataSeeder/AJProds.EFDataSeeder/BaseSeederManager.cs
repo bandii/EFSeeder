@@ -41,7 +41,7 @@ namespace AJProds.EFDataSeeder
                        .Where(seed => seed.Mode == when
                                    && (seed.AlwaysRun
                                     || seedAlreadyRun.All(history => history.SeedName != seed.SeedName)))
-                       .OrderBy(seed => seed.Priority)
+                       .OrderBy(seed => seed.Priority)  
                        .ToList();
 
             _logger.LogInformation($"Seeding started with {seeds.Count} to be run.");

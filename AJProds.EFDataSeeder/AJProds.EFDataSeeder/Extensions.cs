@@ -70,8 +70,15 @@ namespace AJProds.EFDataSeeder
                     }
 
                     // Migrate own schema changes
-                    await dbContext.Database.MigrateAsync()
-                                   .ConfigureAwait(false);
+                    if (dbContext.Database.IsRelational())
+                    {
+                        await dbContext.Database.MigrateAsync()
+                                       .ConfigureAwait(false);
+                    }
+                    else // We are using for example an inMemory db
+                    {
+                        await dbContext.Database.EnsureCreatedAsync();
+                    }
 
                     // Seed before app start, after migration
                     await scope.ServiceProvider

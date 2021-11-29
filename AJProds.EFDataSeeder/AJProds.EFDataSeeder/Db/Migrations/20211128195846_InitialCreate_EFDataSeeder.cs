@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AJProds.EFDataSeeder.Db.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate_EFDataSeeder : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

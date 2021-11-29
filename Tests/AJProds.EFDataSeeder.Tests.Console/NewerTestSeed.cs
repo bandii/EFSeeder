@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using AJProds.EFDataSeeder.Tests.Common;
+
 namespace AJProds.EFDataSeeder.Tests.Console
 {
     public class NewerTestSeed: ISeed

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using AJProds.EFDataSeeder.Db;
+using AJProds.EFDataSeeder.Tests.Common;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace AJProds.EFDataSeeder.Tests.Console
 {
+    /// <summary>
+    /// A common console app to demonstrate the tool
+    /// </summary>
     class Program
     {
         public const string CONNECTION_LOCAL_TEST =
@@ -20,7 +23,7 @@ namespace AJProds.EFDataSeeder.Tests.Console
                       .ConfigureServices(ConfigureServices())
                       .Build()
                       .MigrateThenRunAsync(provider =>
-                                               // Ensure the TestDbContext's migration is run on start
+                                               // Ensure the TestDbContext's migration has run on start
                                                provider.GetRequiredService<TestDbContext>()
                                                        .Database.MigrateAsync());
         }
@@ -32,17 +35,19 @@ namespace AJProds.EFDataSeeder.Tests.Console
                        // Register seeders
                        collection.RegisterDataSeeder<TestSeed>();
                        collection.RegisterDataSeeder<NewerTestSeed>();
-                       
+
                        // My own, custom, test setup
                        // 1. StartUp project is this console app, and the migration needs to be here
                        // 2. So run this script from its root without the --project param
-                       // dotnet ef migrations add InitialCreate --context TestDbContext
+                       // dotnet ef migrations add InitialCreate --project ..\AJProds.EFDataSeeder.Tests.Common\ --context TestDbContext
                        collection.AddDbContext<TestDbContext>(builder => builder
-                                                                 .UseSqlServer(CONNECTION_LOCAL_TEST,
-                                                                               optionsBuilder =>
-                                                                                   optionsBuilder
-                                                                                      .MigrationsHistoryTable("__EFMigrationsHistory",
-                                                                                           TestDbContext.SCHEMA)));
+                                                                 .UseSqlServer(CONNECTION_LOCAL_TEST
+                                                                               // It is not necessary, just an example
+                                                                               // , optionsBuilder =>
+                                                                               //      optionsBuilder
+                                                                               //         .MigrationsHistoryTable("__EFMigrationsHistory",
+                                                                               //              TestDbContext.SCHEMA)
+                                                                              ));
 
                        // EFSeeder setup - with an own EF Migration History table
                        // 1. StartUp project is this console app, and the migration needs to be here
@@ -51,11 +56,13 @@ namespace AJProds.EFDataSeeder.Tests.Console
                        collection.RegisterDataSeederServices(builder =>
                                                              {
                                                                  builder
-                                                                    .UseSqlServer(CONNECTION_LOCAL_TEST,
-                                                                                  optionsBuilder =>
-                                                                                      optionsBuilder
-                                                                                         .MigrationsHistoryTable("__EFSeederMigrationsHistory",
-                                                                                              SeederDbContext.SCHEMA));
+                                                                    .UseSqlServer(CONNECTION_LOCAL_TEST
+                                                                                  // I use it to generate the migration scripts
+                                                                                  // , optionsBuilder =>
+                                                                                  //      optionsBuilder
+                                                                                  //         .MigrationsHistoryTable("__EFSeederMigrationsHistory",
+                                                                                  //              SeederDbContext.SCHEMA)
+                                                                                 );
                                                              });
                    };
         }

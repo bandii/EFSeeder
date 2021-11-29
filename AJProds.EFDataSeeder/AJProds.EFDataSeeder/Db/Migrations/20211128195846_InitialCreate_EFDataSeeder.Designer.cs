@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AJProds.EFDataSeeder.Db.Migrations
 {
     [DbContext(typeof(SeederDbContext))]
-    [Migration("20211128195846_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211128195846_InitialCreate_EFDataSeeder")]
+    partial class InitialCreate_EFDataSeeder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

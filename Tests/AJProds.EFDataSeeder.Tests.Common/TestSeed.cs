@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AJProds.EFDataSeeder.Tests.Console
+namespace AJProds.EFDataSeeder.Tests.Common
 {
     public class TestSeed: ISeed
     {
