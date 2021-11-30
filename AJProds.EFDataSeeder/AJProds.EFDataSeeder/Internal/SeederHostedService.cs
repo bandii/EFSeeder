@@ -39,7 +39,7 @@ namespace AJProds.EFDataSeeder.Internal
                 {
                     try
                     {
-                        await Task.Run(() => _baseSeederManager.Seed(SeedMode.AfterAppStart),
+                        await Task.Run(() => _baseSeederManager.SeedAsync(SeedMode.AfterAppStart),
                                        linkedCts.Token);
                     }
                     catch (Exception e)

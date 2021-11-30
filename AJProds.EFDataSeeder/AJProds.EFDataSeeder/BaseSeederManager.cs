@@ -30,7 +30,7 @@ namespace AJProds.EFDataSeeder
         /// Runs the <see cref="ISeed"/> implementations according to the <paramref name="when"/>
         /// </summary>
         /// <param name="when">When is this function get called?</param>
-        public virtual async Task Seed(SeedMode when = SeedMode.None)
+        public virtual async Task SeedAsync(SeedMode when = SeedMode.None)
         {
             _logger.LogInformation("Seeding started");
 
@@ -57,7 +57,8 @@ namespace AJProds.EFDataSeeder
         private async Task SaveHistoryLog(ISeed seeder, List<SeederHistory> seedAlreadyRun)
         {
             // One-time run == insert
-            if (!seeder.AlwaysRun)
+            if (!seeder.AlwaysRun
+                || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
             {
                 _dbContext.SeederHistories.Add(new SeederHistory
                                                {

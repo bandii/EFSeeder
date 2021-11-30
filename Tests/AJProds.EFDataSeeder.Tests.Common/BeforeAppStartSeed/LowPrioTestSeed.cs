@@ -1,20 +1,20 @@
 ﻿using System.Threading.Tasks;
 
-namespace AJProds.EFDataSeeder.Tests.Common
+namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
 {
-    public class TestSeed: ISeed
+    public class LowPrioTestSeed: ISeed
     {
         private readonly TestDbContext _dbContext;
 
-        public int Priority => 0;
+        public int Priority => 100;
 
-        public string SeedName => "High Prio seed";
+        public string SeedName => "Low Prio seed";
 
-        public SeedMode Mode => SeedMode.AfterAppStart;
+        public SeedMode Mode => SeedMode.BeforeAppStart;
 
         public bool AlwaysRun => false;
 
-        public TestSeed(TestDbContext dbContext)
+        public LowPrioTestSeed(TestDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -23,7 +23,7 @@ namespace AJProds.EFDataSeeder.Tests.Common
         {
             _dbContext.Testees.Add(new Testee
                                    {
-                                       Description = "Something 1"
+                                       Description = "Low Prio seed"
                                    });
 
             await _dbContext.SaveChangesAsync();

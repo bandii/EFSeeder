@@ -1,6 +1,13 @@
 ﻿using System;
 
+using AJProds.EFDataSeeder.Db;
+using AJProds.EFDataSeeder.Tests.Common;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+using Moq;
 
 using NUnit.Framework;
 
@@ -36,6 +43,51 @@ namespace AJProds.EFDataSeeder.Tests
         protected void Clear()
         {
             SharedServiceCollection = null;
+        }
+        
+        [SetUp]
+        public void SetUp()
+        {
+            // Tests logger
+            RegisterServicesOnSetUp();
+
+            // Add TestDbContext
+            SharedServiceCollection.AddDbContext<TestDbContext>(builder => builder
+                                                                   .UseInMemoryDatabase("MigrateThenRunTests"));
+
+            // Register the seeder tools
+            SharedServiceCollection.RegisterDataSeederServices(builder => builder
+                                                                  .UseInMemoryDatabase("MigrateThenRunTests"));
+
+            // MigrateThenRunAsync uses a scope
+            var serviceScope = new Mock<IServiceScope>();
+            serviceScope.Setup(x => x.ServiceProvider).Returns(SharedServiceProvider);
+
+            var serviceScopeFactory = new Mock<IServiceScopeFactory>();
+            serviceScopeFactory.Setup(x => x.CreateScope())
+                               .Returns(serviceScope.Object);
+
+            SharedServiceCollection.AddTransient(_ => serviceScopeFactory.Object);
+        }
+
+        protected virtual void RegisterServicesOnSetUp()
+        {
+            SharedServiceCollection.AddTransient(_ => Mock.Of<ILogger>());
+            SharedServiceCollection.AddTransient(_ => Mock.Of<ILogger<BaseSeederManager>>());
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            SharedServiceProvider.GetRequiredService<SeederDbContext>()
+                                 .Database
+                                 .EnsureDeleted();
+
+            SharedServiceProvider.GetRequiredService<TestDbContext>()
+                                 .Database
+                                 .EnsureDeleted();
+
+            Clear();
         }
     }
 }
