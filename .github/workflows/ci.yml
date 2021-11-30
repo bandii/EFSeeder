@@ -23,4 +23,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet run --project AJProds.EFDataSeeder
+      run: dotnet test
