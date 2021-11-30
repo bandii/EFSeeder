@@ -16,9 +16,9 @@ jobs:
       with:
         dotnet-version: '5.0'
     - name: Find sln
-      run: dir
-    - name: Find sln2
       run: cd AJProds.EFDataSeeder
+    - name: Find sln2
+      run: dir
     - name: Install dependencies
       run: dotnet restore
     - name: Build
