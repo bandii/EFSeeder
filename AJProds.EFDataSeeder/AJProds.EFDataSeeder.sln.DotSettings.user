@@ -7,4 +7,5 @@
     &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.StartThenSeedTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.CustomRunSeedTests.CustomStart&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
