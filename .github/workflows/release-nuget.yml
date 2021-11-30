@@ -1,0 +1,27 @@
+name: release-nuget
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-nuget:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./AJProds.EFDataSeeder
+    steps:
+    - uses: actions/checkout@v2.4.0
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1.9.0
+      with:
+        dotnet-version: '5.0'
+    - name: Create NuGet Package
+      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
+    - name: Archive NuGet Package
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: AJProds.EFDataSeeder
+        path: ./AJProds.EFDataSeeder/bin/Release/AJProds.EFDataSeeder.${{ github.event.release.tag_name }}.nupkg
+    - name: Publish Nuget Package
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --no-symbols true
