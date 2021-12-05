@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Tests.Common;
-using AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed;
+using AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +36,8 @@ namespace AJProds.EFDataSeeder.Tests.Console
                        // Register seeders
                        collection.RegisterDataSeeder<HighPrioTestSeed>();
                        collection.RegisterDataSeeder<LowPrioTestSeed>();
+                       collection.RegisterDataSeeder<AlwaysRunTestSeed>();
+                       collection.RegisterDataSeeder<NoneTestSeed>();
 
                        // My own, custom, test setup
                        // 1. StartUp project is this console app, and the migration needs to be here

@@ -77,7 +77,8 @@ namespace AJProds.EFDataSeeder
                     }
                     else // We are using for example an inMemory db
                     {
-                        await dbContext.Database.EnsureCreatedAsync();
+                        await dbContext.Database.EnsureCreatedAsync()
+                                       .ConfigureAwait(false);
                     }
 
                     // Seed before app start, after migration
