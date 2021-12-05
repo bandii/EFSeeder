@@ -22,6 +22,6 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: AJProds.EFDataSeeder
-        path: ./AJProds.EFDataSeeder/bin/Release/AJProds.EFDataSeeder.${{ github.event.release.tag_name }}.nupkg
+        path: ./**/*.nupkg
     - name: Publish Nuget Package
       run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --no-symbols true
