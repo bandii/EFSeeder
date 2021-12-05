@@ -23,34 +23,6 @@ All you need to do is simply to register ISeed implementations to your [ServiceC
 
 Later on, you can see which seeds have been run via the `sdr.SeederHistories` table.
 
-### SeadMode.None
-No `ISeed` logic will be run. You need to find the `BaseSeederManager` in your ioc 
-and run it with the `SeedMode.None` argument.
-```cs
-var baseSeederManager = provider.GetRequiredService<BaseSeederManager>();
-baseSeederManager.Seed(SeedMode.None);
-```
-
-### SeadMode.BeforeAppStart
-You must use the `Extensions.MigrateThenRunAsync` with your `HostBuilder`,
-because this procedure will not start up the host until all migration
-and seed (with _`SeedMode.BeforeAppStart`_) has been run successfully.
-
-```cs
-await Host.CreateDefaultBuilder()
-          .ConfigureServices(ConfigureServices())
-          .Build()
-          .MigrateThenRunAsync();
-```
-
-### SeadMode.AfterAppStart
-After the host has started successfully, those `ISeed` classes, that have been set to run `AfterAppStart`
-will run in the background, in an `IHostedService`.
-
-### ISeed.RunAlways => true
-You can re-run the `ISeed` procedures every time, when the application starts up. 
-Simply set the `RunAlways` property to true in your `ISeed` implementation.
-
 ## How to use?
 1. Register your `ISeed` implementations with the `Extensions.RegisterDataSeeder<>`
    * Here goes your implementations of `ISeed`
@@ -131,3 +103,33 @@ class Program
     }
 }
 ```
+
+## Seed options
+
+### SeadMode.None
+No `ISeed` logic will be run. You need to find the `BaseSeederManager` in your ioc
+and run it with the `SeedMode.None` argument.
+```cs
+var baseSeederManager = provider.GetRequiredService<BaseSeederManager>();
+baseSeederManager.Seed(SeedMode.None);
+```
+
+### SeadMode.BeforeAppStart
+You must use the `Extensions.MigrateThenRunAsync` with your `HostBuilder`,
+because this procedure will not start up the host until all migration
+and seed (with _`SeedMode.BeforeAppStart`_) has been run successfully.
+
+```cs
+await Host.CreateDefaultBuilder()
+          .ConfigureServices(ConfigureServices())
+          .Build()
+          .MigrateThenRunAsync();
+```
+
+### SeadMode.AfterAppStart
+After the host has started successfully, those `ISeed` classes, that have been set to run `AfterAppStart`
+will run in the background, in an `IHostedService`.
+
+### ISeed.RunAlways => true
+You can re-run the `ISeed` procedures every time, when the application starts up.
+Simply set the `RunAlways` property to true in your `ISeed` implementation.
