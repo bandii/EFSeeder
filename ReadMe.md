@@ -13,7 +13,7 @@ You also would like to apply the business logic regarding the User Access of the
 who modified user data and when?
 
 _Please note that you should not face with these problems. Instead of trying to patch problems like this, 
-it worth to plan ahead and prepare for these kind of problems in the start._
+it worth to plan ahead and prepare for these kind of problems in the start. You should also check EF Core's pure solution: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding_
 
 ## Solution
 This package helps you to seed data with accessing [the IoC container](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0) of the application.
