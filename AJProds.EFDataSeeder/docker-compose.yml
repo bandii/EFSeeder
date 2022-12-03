@@ -1,0 +1,40 @@
+﻿# docker-compose up -d
+
+services:
+  
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ChargerSharing
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      
+  mssql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "password123"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+  
+  pgadmin:
+    container_name: pgadmin_container_efSeeder
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-test@charger.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:80  # visit localhost:5050 in your browser, and see the credentials in this file
+        
+volumes:
+  postgres:
+  pgadmin:

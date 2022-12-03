@@ -2,6 +2,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using AJProds.EFDataSeeder.Core;
+using AJProds.EFDataSeeder.Core.Db;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,8 +13,6 @@ using Moq;
 
 using NUnit.Framework;
 
-using AJProds.EFDataSeeder.Db;
-using AJProds.EFDataSeeder.Internal;
 using AJProds.EFDataSeeder.Tests.Common;
 using AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed;
 

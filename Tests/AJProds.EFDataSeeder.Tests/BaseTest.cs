@@ -1,6 +1,7 @@
 ﻿using System;
 
-using AJProds.EFDataSeeder.Db;
+using AJProds.EFDataSeeder.Core;
+using AJProds.EFDataSeeder.Core.Db;
 using AJProds.EFDataSeeder.Tests.Common;
 
 using Microsoft.EntityFrameworkCore;

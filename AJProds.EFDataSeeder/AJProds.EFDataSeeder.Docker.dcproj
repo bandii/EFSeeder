@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
+    <PropertyGroup Label="Globals">
+        <DockerTargetOS>Linux</DockerTargetOS>
+        <ProjectGuid>9c31f76d-0249-4004-9b65-d5fa07cf95f8</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+      <None Include="docker-compose.obs.yml">
+        <DependentUpon>docker-compose.yml</DependentUpon>
+      </None>
+      <None Include="docker-compose.yml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="otel-collector-config.yaml" />
+    </ItemGroup>
+</Project>

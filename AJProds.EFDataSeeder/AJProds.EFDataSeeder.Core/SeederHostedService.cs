@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AJProds.EFDataSeeder.Internal
+namespace AJProds.EFDataSeeder.Core
 {
     internal class SeederHostedService : IHostedService
     {

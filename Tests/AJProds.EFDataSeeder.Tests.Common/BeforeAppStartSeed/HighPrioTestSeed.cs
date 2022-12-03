@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using AJProds.EFDataSeeder.Core;
+
 namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
 {
     public class HighPrioTestSeed: ISeed

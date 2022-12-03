@@ -133,3 +133,14 @@ will run in the background, in an `IHostedService`.
 ### ISeed.RunAlways => true
 You can re-run the `ISeed` procedures every time, when the application starts up.
 Simply set the `RunAlways` property to true in your `ISeed` implementation.
+
+# TODO
+- [x] Add docker-compose for testing
+- [ ] Support any relational dbs
+- [ ] Logging review
+- [ ] Add more examples, especially about how to install it!
+- [ ] Cancellation tokens
+- [ ] Bump versions to net 5 latest
+- [ ] Minimal API example
+- [ ] Support non-relational dbs?
+- [ ] Add UI in a new project?

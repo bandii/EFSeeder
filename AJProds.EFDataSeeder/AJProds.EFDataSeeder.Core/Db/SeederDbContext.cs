@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace AJProds.EFDataSeeder.Db
+namespace AJProds.EFDataSeeder.Core.Db
 {
     public class SeederDbContext : DbContext
     {
@@ -15,6 +15,13 @@ namespace AJProds.EFDataSeeder.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            if (Options.HistoryTableConfiguration != null)
+            {
+                modelBuilder.ApplyConfiguration(Options.HistoryTableConfiguration);
+                
+                return;
+            }
+            
             modelBuilder.HasDefaultSchema(SCHEMA);
 
             modelBuilder.Entity<SeederHistory>(builder =>

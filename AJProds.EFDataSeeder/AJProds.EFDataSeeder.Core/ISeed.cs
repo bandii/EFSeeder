@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AJProds.EFDataSeeder
+namespace AJProds.EFDataSeeder.Core
 {
     /// <summary>
     /// Seed procedure implementation.

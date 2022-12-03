@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AJProds.EFDataSeeder.Db;
+using AJProds.EFDataSeeder.Core.Db;
 
 using Microsoft.Extensions.Logging;
 
-namespace AJProds.EFDataSeeder
+namespace AJProds.EFDataSeeder.Core
 {
     public class BaseSeederManager
     {

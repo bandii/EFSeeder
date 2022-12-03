@@ -1,4 +1,4 @@
-﻿namespace AJProds.EFDataSeeder
+﻿namespace AJProds.EFDataSeeder.Core
 {
     /// <summary>
     /// Determines, when to run the <see cref="ISeed"/> implementations

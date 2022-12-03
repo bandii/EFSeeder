@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace AJProds.EFDataSeeder.Db
+namespace AJProds.EFDataSeeder.Core.Db
 {
     /// <summary>
     /// Stores information regarding when did a seed run

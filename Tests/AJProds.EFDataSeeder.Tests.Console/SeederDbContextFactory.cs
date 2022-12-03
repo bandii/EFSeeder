@@ -1,4 +1,4 @@
-﻿using AJProds.EFDataSeeder.Db;
+﻿using AJProds.EFDataSeeder.Core.Db;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
