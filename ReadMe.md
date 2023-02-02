@@ -37,7 +37,7 @@ _The example is from the `AJProds.EFDataSeeder.Tests.Console` project_
 ```cs
 class Program
 {
-    public const string CONNECTION_LOCAL_TEST =
+    public const string CONNECTION_STRING =
     @"Server=localhost\SQLEXPRESS;Initial Catalog=SeederTest;Trusted_Connection=True;MultipleActiveResultSets=true";
     
     static async Task Main(string[] args)
@@ -60,14 +60,10 @@ class Program
                    
                    // My own, custom, test setup
                    collection.AddDbContext<TestDbContext>(builder => builder
-                                                             .UseSqlServer(CONNECTION_LOCAL_TEST));
+                                                             .UseSqlServer(CONNECTION_STRING));
     
                    // EFSeeder setup - with an own EF Migration History table
-                   collection.RegisterDataSeederServices(builder =>
-                                                         {
-                                                             builder
-                                                                .UseSqlServer(CONNECTION_LOCAL_TEST);
-                                                         });
+                   collection.RegisterDataSeederServices(CONNECTION_STRING);
                };
     }
     
@@ -136,11 +132,18 @@ Simply set the `RunAlways` property to true in your `ISeed` implementation.
 
 # TODO
 - [x] Add docker-compose for testing
-- [ ] Support any relational dbs
-- [ ] Logging review
+- [ ] Support more relational dbs
+  - [ ] Core + readme
+  - [x] MSSQL Leg + readme
+  - [ ] Postgres Leg + readme
+  - [ ] MySQL Leg + readme
+
+- [x] Logging review
+- [x] Cancellation tokens
+- [ ] Bump versions to LTS -> NET 6
+
 - [ ] Add more examples, especially about how to install it!
-- [ ] Cancellation tokens
-- [ ] Bump versions to net 5 latest
+- [ ] Add sample about how to use the Core with any relational dbs! -> exporting dbContext
+
 - [ ] Minimal API example
-- [ ] Support non-relational dbs?
 - [ ] Add UI in a new project?

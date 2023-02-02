@@ -2,14 +2,14 @@
 using System;
 
 using AJProds.EFDataSeeder.Core.Db;
-using AJProds.EFDataSeeder.Db;
+using AJProds.EFDataSeeder.MsSql.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AJProds.EFDataSeeder.Db.Migrations
+namespace AJProds.EFDataSeeder.MsSql.Db.Migrations
 {
     [DbContext(typeof(SeederDbContext))]
     [Migration("20211128195846_InitialCreate_EFDataSeeder")]
@@ -24,7 +24,7 @@ namespace AJProds.EFDataSeeder.Db.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AJProds.EFDataSeeder.Db.SeederHistory", b =>
+            modelBuilder.Entity("AJProds.EFDataSeeder.MsSql.Db.SeederHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

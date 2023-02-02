@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core;
 
@@ -27,6 +28,8 @@ namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
                                    {
                                        Description = "High Prio seed"
                                    });
+            
+            Console.WriteLine("New record has been added by " + nameof(HighPrioTestSeed) + " - " + DateTime.Now);
 
             await _dbContext.SaveChangesAsync();
         }

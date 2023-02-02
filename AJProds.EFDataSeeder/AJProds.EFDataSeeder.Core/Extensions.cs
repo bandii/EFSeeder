@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core.Db;
@@ -22,16 +23,19 @@ namespace AJProds.EFDataSeeder.Core
         /// Registers all the necessary tools to be able to use EFDataSeeder
         /// </summary>
         /// <param name="collection"><see cref="IServiceCollection"/></param>
-        /// <param name="dbConnectionOptions"></param>
+        /// <param name="dbConnectionOptions"><see cref="DbContextOptionsBuilder"/></param>
         /// <param name="historyTableConfiguration">Provide your own <see cref="SeederHistory"/> configuration</param>
+        /// <param name="schemaName">The name of the schema, what the nuget will use</param>
         public static IServiceCollection RegisterDataSeederServices(this IServiceCollection collection,
                                                                     Action<DbContextOptionsBuilder> dbConnectionOptions,
-                                                                    IEntityTypeConfiguration<SeederHistory> historyTableConfiguration = null)
+                                                                    IEntityTypeConfiguration<SeederHistory> historyTableConfiguration = null,
+                                                                    string schemaName = "sdr")
         {
             // Register tools
             collection.AddTransient<BaseSeederManager>();
             collection.AddHostedService<SeederHostedService>();
 
+            SeederDbContext.SCHEMA = schemaName;
             collection.AddDbContext<SeederDbContext>(dbConnectionOptions);
             Options.HistoryTableConfiguration = historyTableConfiguration;
 
@@ -57,8 +61,10 @@ namespace AJProds.EFDataSeeder.Core
         /// <param name="actionBeforeRun">Apply your custom logic to be run before seed procedures run.
         /// For example: run your db context migrations here.
         /// </param>
+        /// <param name="cts"><see cref="CancellationToken"/></param>
         public static async Task MigrateThenRunAsync(this IHost host,
-                                                     Func<IServiceProvider, Task> actionBeforeRun = null)
+                                                     Func<IServiceProvider, Task> actionBeforeRun = null,
+                                                     CancellationToken cts = default)
         {
             using (var scope = host.Services
                                    .GetRequiredService<IServiceScopeFactory>()
@@ -79,11 +85,11 @@ namespace AJProds.EFDataSeeder.Core
                     // Migrate own schema changes
                     if (dbContext.Database.IsRelational())
                     {
-                        await dbContext.Database.MigrateAsync();
+                        await dbContext.Database.MigrateAsync(cts);
                     }
                     else // We are using for example an inMemory db
                     {
-                        await dbContext.Database.EnsureCreatedAsync();
+                        await dbContext.Database.EnsureCreatedAsync(cts);
                     }
 
                     // Seed before app start, after migration
@@ -101,7 +107,7 @@ namespace AJProds.EFDataSeeder.Core
                 }
             }
 
-            await host.StartAsync()
+            await host.StartAsync(cts)
                       .ConfigureAwait(false);
         }
     }

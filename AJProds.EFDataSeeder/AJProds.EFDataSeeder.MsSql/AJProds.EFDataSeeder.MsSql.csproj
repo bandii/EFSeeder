@@ -9,6 +9,7 @@
         <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RootNamespace>AJProds.EFDataSeeder.MsSql</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

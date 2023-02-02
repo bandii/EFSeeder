@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder", "AJProds.EFDataSeeder\AJProds.EFDataSeeder.csproj", "{7D61C73A-30FA-45FE-8218-70F6AA6B0EF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.MsSql", "AJProds.EFDataSeeder.MsSql\AJProds.EFDataSeeder.MsSql.csproj", "{7D61C73A-30FA-45FE-8218-70F6AA6B0EF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{679BD7EC-EA12-4E27-A413-C1DBB538FDE5}"
 EndProject

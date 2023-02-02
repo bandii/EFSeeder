@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core;
 
@@ -29,6 +30,8 @@ namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
                                    });
 
             await _dbContext.SaveChangesAsync();
+            
+            Console.WriteLine("New record has been added by " + nameof(AlwaysRunTestSeed) + " - " + DateTime.Now);
         }
     }
 }

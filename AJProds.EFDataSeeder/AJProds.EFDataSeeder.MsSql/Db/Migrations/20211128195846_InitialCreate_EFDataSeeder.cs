@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AJProds.EFDataSeeder.Db.Migrations
+namespace AJProds.EFDataSeeder.MsSql.Db.Migrations
 {
     public partial class InitialCreate_EFDataSeeder : Migration
     {

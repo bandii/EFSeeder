@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core;
 
@@ -27,6 +28,8 @@ namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
                                    {
                                        Description = "None seed"
                                    });
+            
+            Console.WriteLine("!!! No record should be added by " + nameof(NoneTestSeed) + " - " + DateTime.Now);
 
             await _dbContext.SaveChangesAsync();
         }

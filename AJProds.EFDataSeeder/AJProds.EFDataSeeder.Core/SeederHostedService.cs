@@ -54,6 +54,8 @@ namespace AJProds.EFDataSeeder.Core
         /// <inheritdoc />
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Stopping data seeder's hosted service");
+            
             _cts.Cancel();
             return Task.CompletedTask;
         }

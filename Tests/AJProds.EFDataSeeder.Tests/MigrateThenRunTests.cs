@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core.Db;
+using AJProds.EFDataSeeder.MsSql;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

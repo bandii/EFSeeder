@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder\AJProds.EFDataSeeder.csproj" />
+      <ProjectReference Include="..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder.MsSql\AJProds.EFDataSeeder.MsSql.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using AJProds.EFDataSeeder.MsSql;
 using AJProds.EFDataSeeder.Tests.Common;
 using AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed;
 
@@ -15,9 +16,10 @@ namespace AJProds.EFDataSeeder.Tests.Console
     /// </summary>
     class Program
     {
+        // Use the docker-compose.yml
         public const string CONNECTION_LOCAL_TEST =
-            @"Server=localhost\SQLEXPRESS;Initial Catalog=SeederTest;Trusted_Connection=True;MultipleActiveResultSets=true";
-
+            @"Data Source=localhost;Initial Catalog=SeederTest;User ID=sa;Password=Password123";
+        
         static async Task Main(string[] args)
         {
             await Host.CreateDefaultBuilder()
@@ -56,17 +58,7 @@ namespace AJProds.EFDataSeeder.Tests.Console
                        // 1. StartUp project is this console app, and the migration needs to be here
                        // 2. So run this script from its root without the --project param
                        // dotnet ef migrations add InitialCreate --project ..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder\ --context SeederDbContext
-                       collection.RegisterDataSeederServices(builder =>
-                                                             {
-                                                                 builder
-                                                                    .UseSqlServer(CONNECTION_LOCAL_TEST
-                                                                                  // I use it to generate the migration scripts
-                                                                                  // , optionsBuilder =>
-                                                                                  //      optionsBuilder
-                                                                                  //         .MigrationsHistoryTable("__EFSeederMigrationsHistory",
-                                                                                  //              SeederDbContext.SCHEMA)
-                                                                                 );
-                                                             });
+                       collection.RegisterDataSeederServices(CONNECTION_LOCAL_TEST);
                    };
         }
     }

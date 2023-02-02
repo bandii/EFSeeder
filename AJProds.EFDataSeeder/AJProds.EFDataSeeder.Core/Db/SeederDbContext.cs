@@ -4,7 +4,7 @@ namespace AJProds.EFDataSeeder.Core.Db
 {
     public class SeederDbContext : DbContext
     {
-        public const string SCHEMA = "sdr";
+        public static string SCHEMA = "sdr";
 
         public DbSet<SeederHistory> SeederHistories { get; set; }
 

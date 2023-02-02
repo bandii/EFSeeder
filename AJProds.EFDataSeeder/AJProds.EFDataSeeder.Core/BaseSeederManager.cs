@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,6 +33,9 @@ namespace AJProds.EFDataSeeder.Core
         /// <param name="when">When is this function get called?</param>
         public virtual async Task SeedAsync(SeedMode when = SeedMode.None)
         {
+            using var startActivity = Telemetries.DefaultActivitySource?.StartActivity("Starting up seeders");
+            
+            startActivity?.AddEvent(new ActivityEvent("Seeding started for SeedMode: " + Enum.GetName(when)));
             _logger.LogInformation("Seeding started");
 
             var seedAlreadyRun = _dbContext.SeederHistories
@@ -41,24 +45,26 @@ namespace AJProds.EFDataSeeder.Core
                        .Where(seed => seed.Mode == when
                                    && (seed.AlwaysRun
                                     || seedAlreadyRun.All(history => history.SeedName != seed.SeedName)))
-                       .OrderBy(seed => seed.Priority)  
+                       .OrderBy(seed => seed.Priority)
                        .ToList();
 
-            _logger.LogInformation($"Seeding started with {seeds.Count} to be run.");
+            _logger.LogInformation("Seeding started with {SeedsCount} to be run", seeds.Count);
             foreach (var seeder in seeds)
             {
-                _logger.LogInformation($"Seeding {seeder.SeedName}..");
+                startActivity?.AddEvent(new ActivityEvent($"Seeding {seeder.SeedName}.."));
+                _logger.LogInformation("Seeding {SeederSeedName}..", seeder.SeedName);
+                
                 await seeder.SeedAsync();
-
+                
                 await SaveHistoryLog(seeder, seedAlreadyRun);
             }
         }
 
-        private async Task SaveHistoryLog(ISeed seeder, List<SeederHistory> seedAlreadyRun)
+        private async Task SaveHistoryLog(ISeed seeder, IReadOnlyCollection<SeederHistory> seedAlreadyRun)
         {
             // One-time run == insert
             if (!seeder.AlwaysRun
-                || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
+             || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
             {
                 _dbContext.SeederHistories.Add(new SeederHistory
                                                {
