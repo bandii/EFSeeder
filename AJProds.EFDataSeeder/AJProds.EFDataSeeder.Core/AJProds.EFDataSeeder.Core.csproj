@@ -5,11 +5,18 @@
         <Title>EFDataSeeder.Core</Title>
         <Description>Seeding, manipulating data on app start for relational databases</Description>
         <PackageLicense>MIT</PackageLicense>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/bandii/EFSeeder</RepositoryUrl>
-        <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <Content Include=".\readme.md"
+                 Link="readme.md"
+                 Pack="true"
+                 PackagePath="readme.md"/>
+    </ItemGroup>
 
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">

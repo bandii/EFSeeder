@@ -5,12 +5,19 @@
         <Title>EFDataSeeder</Title>
         <Description>Seeding, manipulating data on app start with MSSQL</Description>
         <PackageLicense>MIT</PackageLicense>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/bandii/EFSeeder</RepositoryUrl>
         <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <RootNamespace>AJProds.EFDataSeeder.MsSql</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include=".\readme.md"
+                 Link="readme.md"
+                 Pack="true"
+                 PackagePath="readme.md"/>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
