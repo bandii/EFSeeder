@@ -13,10 +13,10 @@ You also would like to apply the business logic regarding the User Access of the
 who modified user data and when?
 
 _Please note that you should not face with these problems. Instead of trying to patch problems like this, 
-it worth to plan ahead and prepare for these kind of problems in the start. You should also check EF Core's pure solution: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding_
+it worth to plan ahead and prepare for these kind of problems in the start. You should also check EF Core's data-seeding option: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding_
 
 ## Solution
-This package helps you to seed data with accessing [the IoC container](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0) of the application.
+This package helps you seeding data by accessing [the IoC container](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0) of the application.
 
 You can seed the data with using the existing business logic already composed in your solution and access it later in the IoC of your app.
 All you need to do is simply to register ISeed implementations to your [ServiceCollection](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollection?view=dotnet-plat-ext-6.0). 
@@ -24,6 +24,7 @@ All you need to do is simply to register ISeed implementations to your [ServiceC
 Later on, you can see which seeds have been run via the `sdr.SeederHistories` table.
 
 ## How to use?
+0. Either generate the migrations for your DB, or reference the existing, db-specific nuget packages of this project.
 1. Register your `ISeed` implementations with the `Extensions.RegisterDataSeeder<>`
    * Here goes your implementations of `ISeed`
 2. Register this project's tools and services via the `Extensions.RegisterDataSeederServices`
@@ -37,7 +38,7 @@ _The example is from the `AJProds.EFDataSeeder.Tests.Console` project_
 ```cs
 class Program
 {
-    public const string CONNECTION_LOCAL_TEST =
+    public const string CONNECTION_STRING =
     @"Server=localhost\SQLEXPRESS;Initial Catalog=SeederTest;Trusted_Connection=True;MultipleActiveResultSets=true";
     
     static async Task Main(string[] args)
@@ -60,14 +61,10 @@ class Program
                    
                    // My own, custom, test setup
                    collection.AddDbContext<TestDbContext>(builder => builder
-                                                             .UseSqlServer(CONNECTION_LOCAL_TEST));
+                                                             .UseSqlServer(CONNECTION_STRING));
     
                    // EFSeeder setup - with an own EF Migration History table
-                   collection.RegisterDataSeederServices(builder =>
-                                                         {
-                                                             builder
-                                                                .UseSqlServer(CONNECTION_LOCAL_TEST);
-                                                         });
+                   collection.RegisterDataSeederServices(CONNECTION_STRING);
                };
     }
     
@@ -133,3 +130,7 @@ will run in the background, in an `IHostedService`.
 ### ISeed.RunAlways => true
 You can re-run the `ISeed` procedures every time, when the application starts up.
 Simply set the `RunAlways` property to true in your `ISeed` implementation.
+
+# TODO
+- [ ] Bump versions to LTS -> NET 6
+- [ ] Add UI in a new project?

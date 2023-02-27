@@ -1,11 +1,13 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\bandi\AppData\Local\JetBrains\Rider2021.2\resharper-host\temp\Rider\vAny\CoverageData\_AJProds.EFDataSeeder.-1130608934\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\bandi\.nuget\packages\microsoft.entityframeworkcore.relational\5.0.12\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Relational.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5558c781_002Dd548_002D43a8_002Da03f_002D975f151bca39/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test0" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.MigrateThenRunTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.StartThenSeedTests.SeedsInvokedInOrder&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.StartThenSeedTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::57BF7FF7-FD88-4483-9A19-CD28D5A0C529::net5.0::AJProds.EFDataSeeder.Tests.CustomRunSeedTests.CustomStart&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="D:\repo\AJProds\EFSeeder\AJProds.EFDataSeeder\Tests\AJProds.EFDataSeeder.Tests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;AJProds.EFDataSeeder.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
 	</wpf:ResourceDictionary>
