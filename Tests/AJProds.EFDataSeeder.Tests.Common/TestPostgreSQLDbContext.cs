@@ -2,20 +2,18 @@
 
 namespace AJProds.EFDataSeeder.Tests.Common
 {
-    public class TestDbContext : DbContext
+    public class TestPostgreSQLDbContext : DbContext, ITestContext
     {
-        public const string SCHEMA = "tst";
-
         public DbSet<Testee> Testees { get; set; }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
+        public TestPostgreSQLDbContext(DbContextOptions<TestPostgreSQLDbContext> options)
             : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema(SCHEMA);
+            modelBuilder.HasDefaultSchema(ITestContext.SCHEMA);
 
             modelBuilder.Entity<Testee>(builder => builder.Property(testee => testee.Description)
                                                           .HasMaxLength(100));

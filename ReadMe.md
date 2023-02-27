@@ -13,10 +13,10 @@ You also would like to apply the business logic regarding the User Access of the
 who modified user data and when?
 
 _Please note that you should not face with these problems. Instead of trying to patch problems like this, 
-it worth to plan ahead and prepare for these kind of problems in the start. You should also check EF Core's pure solution: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding_
+it worth to plan ahead and prepare for these kind of problems in the start. You should also check EF Core's data-seeding option: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding_
 
 ## Solution
-This package helps you to seed data with accessing [the IoC container](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0) of the application.
+This package helps you seeding data by accessing [the IoC container](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0) of the application.
 
 You can seed the data with using the existing business logic already composed in your solution and access it later in the IoC of your app.
 All you need to do is simply to register ISeed implementations to your [ServiceCollection](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollection?view=dotnet-plat-ext-6.0). 
@@ -131,19 +131,5 @@ You can re-run the `ISeed` procedures every time, when the application starts up
 Simply set the `RunAlways` property to true in your `ISeed` implementation.
 
 # TODO
-- [x] Add docker-compose for testing
-- [ ] Support more relational dbs
-  - [ ] Core + readme
-  - [x] MSSQL Leg + readme
-  - [ ] Postgres Leg + readme
-  - [ ] MySQL Leg + readme
-
-- [x] Logging review
-- [x] Cancellation tokens
 - [ ] Bump versions to LTS -> NET 6
-
-- [ ] Add more examples, especially about how to install it!
-- [ ] Add sample about how to use the Core with any relational dbs! -> exporting dbContext
-
-- [ ] Minimal API example
 - [ ] Add UI in a new project?

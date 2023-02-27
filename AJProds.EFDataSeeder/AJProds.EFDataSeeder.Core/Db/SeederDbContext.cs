@@ -15,13 +15,6 @@ namespace AJProds.EFDataSeeder.Core.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (Options.HistoryTableConfiguration != null)
-            {
-                modelBuilder.ApplyConfiguration(Options.HistoryTableConfiguration);
-                
-                return;
-            }
-            
             modelBuilder.HasDefaultSchema(SCHEMA);
 
             modelBuilder.Entity<SeederHistory>(builder =>

@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AJProds.EFDataSeeder.MsSql
+namespace AJProds.EFDataSeeder.PostgreSql
 {
     /// <summary>
     /// Wrapper around the Core services
@@ -22,7 +22,7 @@ namespace AJProds.EFDataSeeder.MsSql
         {
             return collection.RegisterDataSeederServices(options =>
                                                          {
-                                                             options.UseSqlServer(connectionString,
+                                                             options.UseNpgsql(connectionString,
                                                                                   x => x.MigrationsAssembly(typeof(Extensions).Assembly.FullName)
                                                                                  );
                                                          },

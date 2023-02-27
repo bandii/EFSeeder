@@ -1,25 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>AJProds.EFDataSeeder.Tests.Console</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder.MsSql\AJProds.EFDataSeeder.MsSql.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Migrations\PostgreSQL" />
+        <ProjectReference Include="..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder.PostgreSql\AJProds.EFDataSeeder.PostgreSql.csproj" />
+        <ProjectReference Include="..\AJProds.EFDataSeeder.Tests.Common\AJProds.EFDataSeeder.Tests.Common.csproj" />
     </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
 {
     public class AlwaysRunTestSeed: ISeed
     {
-        private readonly TestDbContext _dbContext;
+        private readonly ITestContext _dbContext;
 
         public int Priority => 50;
 
@@ -17,7 +17,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.BeforeAppStartSeed
 
         public bool AlwaysRun => true;
 
-        public AlwaysRunTestSeed(TestDbContext dbContext)
+        public AlwaysRunTestSeed(ITestContext dbContext)
         {
             _dbContext = dbContext;
         }

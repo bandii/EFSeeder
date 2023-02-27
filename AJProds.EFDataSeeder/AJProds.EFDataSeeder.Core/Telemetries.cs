@@ -8,11 +8,6 @@ namespace AJProds.EFDataSeeder.Core
     public static class Telemetries
     {
         /// <summary>
-        /// A prefix for all the Hub projects
-        /// </summary>
-        public static string GlobalPrefix = "EFDataSeeder";
-
-        /// <summary>
         /// The default or root <see cref="ActivitySource"/>
         /// </summary>
         public static ActivitySource? DefaultActivitySource { get; set; }

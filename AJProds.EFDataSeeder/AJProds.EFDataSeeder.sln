@@ -13,13 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests", "..\Tests\AJProds.EFDataSeeder.Tests\AJProds.EFDataSeeder.Tests.csproj", "{57BF7FF7-FD88-4483-9A19-CD28D5A0C529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Console", "..\Tests\AJProds.EFDataSeeder.Tests.Console\AJProds.EFDataSeeder.Tests.Console.csproj", "{8428DF19-5CB7-48E4-9552-8751E53B2B78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.MSSQL.Console", "..\Tests\AJProds.EFDataSeeder.Tests.MSSQL.Console\AJProds.EFDataSeeder.Tests.MSSQL.Console.csproj", "{8428DF19-5CB7-48E4-9552-8751E53B2B78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Common", "..\Tests\AJProds.EFDataSeeder.Tests.Common\AJProds.EFDataSeeder.Tests.Common.csproj", "{112470A3-D85B-4AE9-BE45-2B5FB08D4401}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJProds.EFDataSeeder.Docker", "AJProds.EFDataSeeder.Docker.dcproj", "{9C31F76D-0249-4004-9B65-D5FA07CF95F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Core", "AJProds.EFDataSeeder.Core\AJProds.EFDataSeeder.Core.csproj", "{69A112FA-7E8A-4C0C-9297-A24C54734AA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.PostgreSql", "AJProds.EFDataSeeder.PostgreSql\AJProds.EFDataSeeder.PostgreSql.csproj", "{EC1533C4-F657-40E4-AC2B-11426F934C45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Postgres.Console", "..\Tests\AJProds.EFDataSeeder.Tests.Postgres.Console\AJProds.EFDataSeeder.Tests.Postgres.Console.csproj", "{832249C2-0710-4A6F-A572-163E3333FD97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +51,23 @@ Global
 		{69A112FA-7E8A-4C0C-9297-A24C54734AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69A112FA-7E8A-4C0C-9297-A24C54734AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69A112FA-7E8A-4C0C-9297-A24C54734AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC1533C4-F657-40E4-AC2B-11426F934C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1533C4-F657-40E4-AC2B-11426F934C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1533C4-F657-40E4-AC2B-11426F934C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1533C4-F657-40E4-AC2B-11426F934C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70AE9097-045D-40C6-9F94-E9844519291D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70AE9097-045D-40C6-9F94-E9844519291D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70AE9097-045D-40C6-9F94-E9844519291D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70AE9097-045D-40C6-9F94-E9844519291D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832249C2-0710-4A6F-A572-163E3333FD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832249C2-0710-4A6F-A572-163E3333FD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832249C2-0710-4A6F-A572-163E3333FD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832249C2-0710-4A6F-A572-163E3333FD97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{57BF7FF7-FD88-4483-9A19-CD28D5A0C529} = {679BD7EC-EA12-4E27-A413-C1DBB538FDE5}
 		{8428DF19-5CB7-48E4-9552-8751E53B2B78} = {679BD7EC-EA12-4E27-A413-C1DBB538FDE5}
 		{112470A3-D85B-4AE9-BE45-2B5FB08D4401} = {679BD7EC-EA12-4E27-A413-C1DBB538FDE5}
+		{832249C2-0710-4A6F-A572-163E3333FD97} = {679BD7EC-EA12-4E27-A413-C1DBB538FDE5}
 	EndGlobalSection
 EndGlobal

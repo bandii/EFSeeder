@@ -52,8 +52,8 @@ namespace AJProds.EFDataSeeder.Tests
             // Tests logger
             RegisterServicesOnSetUp();
 
-            // Add TestDbContext
-            SharedServiceCollection.AddDbContext<TestDbContext>(builder => builder
+            // Add TestMSSQLDbContext
+            SharedServiceCollection.AddDbContext<TestMSSQLDbContext>(builder => builder
                                                                    .UseInMemoryDatabase("MigrateThenRunTests"));
 
             // Register the seeder tools
@@ -84,7 +84,7 @@ namespace AJProds.EFDataSeeder.Tests
                                  .Database
                                  .EnsureDeleted();
 
-            SharedServiceProvider.GetRequiredService<TestDbContext>()
+            SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
                                  .Database
                                  .EnsureDeleted();
 

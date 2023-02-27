@@ -6,7 +6,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed
 {
     public class LowPrioTestSeed: ISeed
     {
-        private readonly TestDbContext _dbContext;
+        private readonly ITestContext _dbContext;
 
         public int Priority => 100;
 
@@ -16,7 +16,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed
 
         public bool AlwaysRun => false;
 
-        public LowPrioTestSeed(TestDbContext dbContext)
+        public LowPrioTestSeed(ITestContext dbContext)
         {
             _dbContext = dbContext;
         }

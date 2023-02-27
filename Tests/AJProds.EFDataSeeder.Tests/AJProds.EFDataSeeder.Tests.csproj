@@ -20,7 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\AJProds.EFDataSeeder\AJProds.EFDataSeeder.MsSql\AJProds.EFDataSeeder.MsSql.csproj" />
       <ProjectReference Include="..\AJProds.EFDataSeeder.Tests.Common\AJProds.EFDataSeeder.Tests.Common.csproj" />
-      <ProjectReference Include="..\AJProds.EFDataSeeder.Tests.Console\AJProds.EFDataSeeder.Tests.Console.csproj" />
+      <ProjectReference Include="..\AJProds.EFDataSeeder.Tests.MSSQL.Console\AJProds.EFDataSeeder.Tests.MSSQL.Console.csproj" />
     </ItemGroup>
 
 </Project>

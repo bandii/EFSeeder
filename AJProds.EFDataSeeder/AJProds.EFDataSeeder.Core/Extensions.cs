@@ -12,11 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace AJProds.EFDataSeeder.Core
 {
-    internal static class Options
-    {
-        internal static IEntityTypeConfiguration<SeederHistory> HistoryTableConfiguration;
-    }
-    
     public static class Extensions
     {
         /// <summary>
@@ -24,11 +19,9 @@ namespace AJProds.EFDataSeeder.Core
         /// </summary>
         /// <param name="collection"><see cref="IServiceCollection"/></param>
         /// <param name="dbConnectionOptions"><see cref="DbContextOptionsBuilder"/></param>
-        /// <param name="historyTableConfiguration">Provide your own <see cref="SeederHistory"/> configuration</param>
         /// <param name="schemaName">The name of the schema, what the nuget will use</param>
         public static IServiceCollection RegisterDataSeederServices(this IServiceCollection collection,
                                                                     Action<DbContextOptionsBuilder> dbConnectionOptions,
-                                                                    IEntityTypeConfiguration<SeederHistory> historyTableConfiguration = null,
                                                                     string schemaName = "sdr")
         {
             // Register tools
@@ -37,7 +30,6 @@ namespace AJProds.EFDataSeeder.Core
 
             SeederDbContext.SCHEMA = schemaName;
             collection.AddDbContext<SeederDbContext>(dbConnectionOptions);
-            Options.HistoryTableConfiguration = historyTableConfiguration;
 
             return collection;
         }

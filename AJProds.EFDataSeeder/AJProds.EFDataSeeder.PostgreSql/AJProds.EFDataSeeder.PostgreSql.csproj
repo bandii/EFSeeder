@@ -3,13 +3,13 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Title>EFDataSeeder</Title>
-        <Description>Seeding, manipulating data on app start with MSSQL</Description>
+        <Description>Seeding, manipulating data on app start with PostgreSQL</Description>
         <PackageLicense>MIT</PackageLicense>
         <RepositoryUrl>https://github.com/bandii/EFSeeder</RepositoryUrl>
         <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <RootNamespace>AJProds.EFDataSeeder.MsSql</RootNamespace>
+        <RootNamespace>AJProds.EFDataSeeder.PostgreSql</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,10 +18,10 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,8 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Migrations\SeederDbContextModelSnapshot.cs" />
-        <Compile Remove="Migrations\20211127204406_InitialCreate.Designer.cs" />
+      <Folder Include="Migrations" />
     </ItemGroup>
 
 </Project>

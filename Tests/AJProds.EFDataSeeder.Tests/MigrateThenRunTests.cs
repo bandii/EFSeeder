@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using AJProds.EFDataSeeder.Core;
 using AJProds.EFDataSeeder.Core.Db;
-using AJProds.EFDataSeeder.MsSql;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,12 +35,12 @@ namespace AJProds.EFDataSeeder.Tests
             // When
             await testee.Object.MigrateThenRunAsync(async provider =>
                                                     {
-                                                        // Ensure the TestDbContext's migration has been run
-                                                        await provider.GetRequiredService<TestDbContext>()
+                                                        // Ensure the TestMSSQLDbContext's migration has been run
+                                                        await provider.GetRequiredService<TestMSSQLDbContext>()
                                                                       .Database.EnsureCreatedAsync();
 
                                                         // Migration will fail due to the inMemory db
-                                                        // await provider.GetRequiredService<TestDbContext>()
+                                                        // await provider.GetRequiredService<TestMSSQLDbContext>()
                                                         //         .Database.MigrateAsync();
                                                     });
 
@@ -61,7 +61,7 @@ namespace AJProds.EFDataSeeder.Tests
             Assert.AreEqual("Low Prio seed", histories[2].SeedName);
             Assert.False(histories[2].AlwaysRun);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
                                                      .Testees
                                                      .ToList();
 
@@ -88,12 +88,12 @@ namespace AJProds.EFDataSeeder.Tests
 
             await testee.Object.MigrateThenRunAsync(async provider =>
                                                     {
-                                                        // Ensure the TestDbContext's migration has been run
-                                                        await provider.GetRequiredService<TestDbContext>()
+                                                        // Ensure the TestMSSQLDbContext's migration has been run
+                                                        await provider.GetRequiredService<TestMSSQLDbContext>()
                                                                       .Database.EnsureCreatedAsync();
 
                                                         // Migration will fail due to the inMemory db
-                                                        // await provider.GetRequiredService<TestDbContext>()
+                                                        // await provider.GetRequiredService<TestMSSQLDbContext>()
                                                         //         .Database.MigrateAsync();
                                                     });
 
@@ -109,12 +109,12 @@ namespace AJProds.EFDataSeeder.Tests
             // When re-run app
             await testee.Object.MigrateThenRunAsync(async provider =>
                                                     {
-                                                        // Ensure the TestDbContext's migration has been run
-                                                        await provider.GetRequiredService<TestDbContext>()
+                                                        // Ensure the TestMSSQLDbContext's migration has been run
+                                                        await provider.GetRequiredService<TestMSSQLDbContext>()
                                                                       .Database.EnsureCreatedAsync();
 
                                                         // Migration will fail due to the inMemory db
-                                                        // await provider.GetRequiredService<TestDbContext>()
+                                                        // await provider.GetRequiredService<TestMSSQLDbContext>()
                                                         //         .Database.MigrateAsync();
                                                     });
 
@@ -138,7 +138,7 @@ namespace AJProds.EFDataSeeder.Tests
             Assert.True(histories[2].AlwaysRun);
             Assert.Greater(histories[2].LastRunAt, lastRunAtAlwaysRun);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
                                                      .Testees
                                                      .ToList();
 

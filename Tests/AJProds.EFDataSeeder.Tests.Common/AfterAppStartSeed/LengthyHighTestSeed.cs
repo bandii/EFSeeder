@@ -7,7 +7,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed
 {
     public class LengthyHighTestSeed: ISeed
     {
-        private readonly TestDbContext _dbContext;
+        private readonly ITestContext _dbContext;
 
         public int Priority => 0;
 
@@ -17,7 +17,7 @@ namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed
 
         public bool AlwaysRun => false;
 
-        public LengthyHighTestSeed(TestDbContext dbContext)
+        public LengthyHighTestSeed(ITestContext dbContext)
         {
             _dbContext = dbContext;
         }

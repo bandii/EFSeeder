@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AJProds.EFDataSeeder.Tests.Common.Migrations
+namespace AJProds.EFDataSeeder.Tests.Common.Migrations.MSSQL
 {
     public partial class InitialCreate : Migration
     {
