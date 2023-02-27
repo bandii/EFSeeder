@@ -35,12 +35,12 @@ namespace AJProds.EFDataSeeder.Tests
 
             await testee.Object.MigrateThenRunAsync(async provider =>
                                                     {
-                                                        // Ensure the TestMSSQLDbContext's migration has been run
-                                                        await provider.GetRequiredService<TestMSSQLDbContext>()
+                                                        // Ensure the ITestContext's migration has been run
+                                                        await provider.GetRequiredService<ITestContext>()
                                                                       .Database.EnsureCreatedAsync();
 
                                                         // Migration will fail due to the inMemory db
-                                                        // await provider.GetRequiredService<TestMSSQLDbContext>()
+                                                        // await provider.GetRequiredService<ITestContext>()
                                                         //         .Database.MigrateAsync();
                                                     });
             var histories = SharedServiceProvider.GetRequiredService<SeederDbContext>()
@@ -74,7 +74,7 @@ namespace AJProds.EFDataSeeder.Tests
             Assert.AreEqual("None seed", histories[3].SeedName);
             Assert.False(histories[3].AlwaysRun);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<ITestContext>()
                                                      .Testees
                                                      .ToList();
 

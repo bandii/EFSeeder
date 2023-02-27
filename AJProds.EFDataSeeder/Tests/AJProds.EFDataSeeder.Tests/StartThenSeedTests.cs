@@ -60,7 +60,7 @@ namespace AJProds.EFDataSeeder.Tests
             Assert.AreEqual("Low Prio seed", histories[2].SeedName);
             Assert.False(histories[2].AlwaysRun);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<ITestContext>()
                                                      .Testees
                                                      .ToList();
 
@@ -100,7 +100,7 @@ namespace AJProds.EFDataSeeder.Tests
 
             Assert.AreEqual(0, histories.Count);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<ITestContext>()
                                                      .Testees
                                                      .ToList();
 
@@ -136,7 +136,7 @@ namespace AJProds.EFDataSeeder.Tests
 
             Assert.AreEqual(0, histories.Count);
 
-            var testeeRecords = SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
+            var testeeRecords = SharedServiceProvider.GetRequiredService<ITestContext>()
                                                      .Testees
                                                      .ToList();
 

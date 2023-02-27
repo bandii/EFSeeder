@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE = ..\LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests", "..\Tests\AJProds.EFDataSeeder.Tests\AJProds.EFDataSeeder.Tests.csproj", "{57BF7FF7-FD88-4483-9A19-CD28D5A0C529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests", ".\Tests\AJProds.EFDataSeeder.Tests\AJProds.EFDataSeeder.Tests.csproj", "{57BF7FF7-FD88-4483-9A19-CD28D5A0C529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.MSSQL.Console", "..\Tests\AJProds.EFDataSeeder.Tests.MSSQL.Console\AJProds.EFDataSeeder.Tests.MSSQL.Console.csproj", "{8428DF19-5CB7-48E4-9552-8751E53B2B78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.MSSQL.Console", ".\Tests\AJProds.EFDataSeeder.Tests.MSSQL.Console\AJProds.EFDataSeeder.Tests.MSSQL.Console.csproj", "{8428DF19-5CB7-48E4-9552-8751E53B2B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Common", "..\Tests\AJProds.EFDataSeeder.Tests.Common\AJProds.EFDataSeeder.Tests.Common.csproj", "{112470A3-D85B-4AE9-BE45-2B5FB08D4401}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Common", ".\Tests\AJProds.EFDataSeeder.Tests.Common\AJProds.EFDataSeeder.Tests.Common.csproj", "{112470A3-D85B-4AE9-BE45-2B5FB08D4401}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJProds.EFDataSeeder.Docker", "AJProds.EFDataSeeder.Docker.dcproj", "{9C31F76D-0249-4004-9B65-D5FA07CF95F8}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Core",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.PostgreSql", "AJProds.EFDataSeeder.PostgreSql\AJProds.EFDataSeeder.PostgreSql.csproj", "{EC1533C4-F657-40E4-AC2B-11426F934C45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Postgres.Console", "..\Tests\AJProds.EFDataSeeder.Tests.Postgres.Console\AJProds.EFDataSeeder.Tests.Postgres.Console.csproj", "{832249C2-0710-4A6F-A572-163E3333FD97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJProds.EFDataSeeder.Tests.Postgres.Console", ".\Tests\AJProds.EFDataSeeder.Tests.Postgres.Console\AJProds.EFDataSeeder.Tests.Postgres.Console.csproj", "{832249C2-0710-4A6F-A572-163E3333FD97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

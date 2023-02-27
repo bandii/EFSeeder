@@ -35,7 +35,7 @@ namespace AJProds.EFDataSeeder.Tests
         /// Access your services here. The provider will be re-created every time,
         /// so you can register your services anytime
         /// </summary>
-        protected IServiceProvider SharedServiceProvider 
+        protected IServiceProvider SharedServiceProvider
             => SharedServiceCollection.BuildServiceProvider();
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace AJProds.EFDataSeeder.Tests
         {
             SharedServiceCollection = null;
         }
-        
+
         [SetUp]
         public void SetUp()
         {
@@ -53,8 +53,8 @@ namespace AJProds.EFDataSeeder.Tests
             RegisterServicesOnSetUp();
 
             // Add TestMSSQLDbContext
-            SharedServiceCollection.AddDbContext<TestMSSQLDbContext>(builder => builder
-                                                                   .UseInMemoryDatabase("MigrateThenRunTests"));
+            SharedServiceCollection.AddDbContext<ITestContext, TestMSSQLDbContext>(builder => builder
+                                                                                      .UseInMemoryDatabase("MigrateThenRunTests"));
 
             // Register the seeder tools
             SharedServiceCollection.RegisterDataSeederServices(builder => builder
@@ -84,7 +84,7 @@ namespace AJProds.EFDataSeeder.Tests
                                  .Database
                                  .EnsureDeleted();
 
-            SharedServiceProvider.GetRequiredService<TestMSSQLDbContext>()
+            SharedServiceProvider.GetRequiredService<ITestContext>()
                                  .Database
                                  .EnsureDeleted();
 

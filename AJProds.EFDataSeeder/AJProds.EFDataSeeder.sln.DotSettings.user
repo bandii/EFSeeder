@@ -4,7 +4,7 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5558c781_002Dd548_002D43a8_002Da03f_002D975f151bca39/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test0" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="D:\repo\AJProds\EFSeeder\Tests\AJProds.EFDataSeeder.Tests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;AJProds.EFDataSeeder.Tests&amp;gt;" /&gt;&#xD;
+  &lt;Project Location="D:\repo\AJProds\EFSeeder\AJProds.EFDataSeeder\Tests\AJProds.EFDataSeeder.Tests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;AJProds.EFDataSeeder.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	
