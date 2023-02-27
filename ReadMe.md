@@ -24,6 +24,7 @@ All you need to do is simply to register ISeed implementations to your [ServiceC
 Later on, you can see which seeds have been run via the `sdr.SeederHistories` table.
 
 ## How to use?
+0. Either generate the migrations for your DB, or reference the existing, db-specific nuget packages of this project.
 1. Register your `ISeed` implementations with the `Extensions.RegisterDataSeeder<>`
    * Here goes your implementations of `ISeed`
 2. Register this project's tools and services via the `Extensions.RegisterDataSeederServices`
