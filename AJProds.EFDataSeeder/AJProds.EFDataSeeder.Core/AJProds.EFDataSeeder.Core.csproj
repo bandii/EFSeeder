@@ -10,9 +10,9 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <Content Include=".\readme.md"
+        <Content Include="..\..\readme.md"
                  Link="readme.md"
                  Pack="true"
                  PackagePath="readme.md"/>

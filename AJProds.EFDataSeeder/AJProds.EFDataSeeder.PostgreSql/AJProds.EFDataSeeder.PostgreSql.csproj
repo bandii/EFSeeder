@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include=".\readme.md"
+        <Content Include="..\..\readme.md"
                  Link="readme.md"
                  Pack="true"
                  PackagePath="readme.md"/>
