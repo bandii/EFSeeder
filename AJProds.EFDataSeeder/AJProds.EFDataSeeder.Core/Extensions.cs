@@ -87,7 +87,7 @@ namespace AJProds.EFDataSeeder.Core
                     // Seed before app start, after migration
                     await scope.ServiceProvider
                                .GetRequiredService<BaseSeederManager>()
-                               .SeedAsync(SeedMode.BeforeAppStart)
+                               .SeedAsync(SeedMode.BeforeAppStart, cts)
                                .ConfigureAwait(false);
                 }
                 catch (Exception e)

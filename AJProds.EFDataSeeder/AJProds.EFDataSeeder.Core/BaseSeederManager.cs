@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using AJProds.EFDataSeeder.Core.Db;
@@ -31,15 +32,15 @@ namespace AJProds.EFDataSeeder.Core
         /// Runs the <see cref="ISeed"/> implementations according to the <paramref name="when"/>
         /// </summary>
         /// <param name="when">When is this function get called?</param>
-        public virtual async Task SeedAsync(SeedMode when = SeedMode.None)
+        /// <param name="cts"><see cref="CancellationToken"/></param>
+        public virtual async Task SeedAsync(SeedMode when = SeedMode.None, CancellationToken cts = default)
         {
             using var startActivity = Telemetries.DefaultActivitySource?.StartActivity("Starting up seeders");
             
             startActivity?.AddEvent(new ActivityEvent("Seeding started for SeedMode: " + Enum.GetName(when)));
             _logger.LogInformation("Seeding started");
 
-            var seedAlreadyRun = _dbContext.SeederHistories
-                                           .ToList();
+            var seedAlreadyRun = _dbContext.SeederHistories.ToList();
 
             var seeds = _seeders
                        .Where(seed => seed.Mode == when
@@ -55,13 +56,19 @@ namespace AJProds.EFDataSeeder.Core
                 _logger.LogInformation("Seeding {SeederSeedName}..", seeder.SeedName);
                 
                 await seeder.SeedAsync();
-                
                 await SaveHistoryLog(seeder, seedAlreadyRun);
+                
+                if (cts.IsCancellationRequested)
+                {
+                    break;
+                }
             }
         }
 
         private async Task SaveHistoryLog(ISeed seeder, IReadOnlyCollection<SeederHistory> seedAlreadyRun)
         {
+            var now = DateTime.Now;
+            
             // One-time run == insert
             if (!seeder.AlwaysRun
              || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
@@ -70,8 +77,8 @@ namespace AJProds.EFDataSeeder.Core
                                                {
                                                    SeedName = seeder.SeedName,
                                                    AlwaysRun = seeder.AlwaysRun,
-                                                   FirstRunAt = DateTime.Now,
-                                                   LastRunAt = DateTime.Now
+                                                   FirstRunAt = now,
+                                                   LastRunAt = now
                                                });
             }
             else
@@ -81,7 +88,7 @@ namespace AJProds.EFDataSeeder.Core
 
                 seederHistory.SeedName = seeder.SeedName;
                 seederHistory.AlwaysRun = seeder.AlwaysRun;
-                seederHistory.LastRunAt = DateTime.Now;
+                seederHistory.LastRunAt = now;
             }
 
             await _dbContext.SaveChangesAsync();
