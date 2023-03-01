@@ -3,6 +3,7 @@ name: CI
 on:
   push:
     branches: [ main ]
+  
   pull_request:
     branches: [ main ]
 
@@ -14,18 +15,18 @@ jobs:
       run:
         working-directory: ./AJProds.EFDataSeeder
     steps:
-    - uses: actions/checkout@v2.4.0
-    
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.9.0
-      with:
-        dotnet-version: '5.0'
-    
-    - name: Install dependencies
-      run: dotnet restore AJProds.EFDataSeeder.sln
-    
-    - name: Build
-      run: dotnet build --configuration Release --no-restore AJProds.EFDataSeeder.sln
-    
-    - name: Test
-      run: dotnet test -c Release --no-build --no-restore AJProds.EFDataSeeder.sln
+      - uses: actions/checkout@v3.3.0
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1.9.0
+        with:
+          dotnet-version: '6.0'
+
+      - name: Install dependencies
+        run: dotnet restore AJProds.EFDataSeeder.sln
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore AJProds.EFDataSeeder.sln
+
+      - name: Test
+        run: dotnet test -c Release --no-build --no-restore AJProds.EFDataSeeder.sln
