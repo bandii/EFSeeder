@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '6.0'
 
       - name: Create NuGet Package
-        run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
+        run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
 
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
@@ -44,7 +44,7 @@ jobs:
           dotnet-version: '6.0'
 
       - name: Create NuGet Package
-        run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
+        run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
 
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
@@ -69,7 +69,7 @@ jobs:
           dotnet-version: '6.0'
 
       - name: Create NuGet Package
-        run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
+        run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
 
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
