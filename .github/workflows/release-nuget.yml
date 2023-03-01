@@ -11,22 +11,22 @@ jobs:
       run:
         working-directory: ./AJProds.EFDataSeeder/AJProds.EFDataSeeder.Core
     steps:
-      - uses: actions/checkout@v2.4.0
-      
+      - uses: actions/checkout@v3.3.0
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1.9.0
         with:
-          dotnet-version: '5.0'
-      
+          dotnet-version: '6.0'
+
       - name: Create NuGet Package
         run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
-      
+
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
         with:
           name: AJProds.EFDataSeeder.Core
           path: ./**/*.nupkg
-      
+
       - name: Publish Nuget Package
         run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY_CORE }} --source https://api.nuget.org/v3/index.json
 
@@ -36,22 +36,22 @@ jobs:
       run:
         working-directory: ./AJProds.EFDataSeeder/AJProds.EFDataSeeder.MsSql
     steps:
-      - uses: actions/checkout@v2.4.0
-      
+      - uses: actions/checkout@v3.3.0
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1.9.0
         with:
-          dotnet-version: '5.0'
-      
+          dotnet-version: '6.0'
+
       - name: Create NuGet Package
         run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
-      
+
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
         with:
           name: AJProds.EFDataSeeder
           path: ./**/*.nupkg
-      
+
       - name: Publish Nuget Package
         run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY_MSSQL }} --source https://api.nuget.org/v3/index.json
 
@@ -61,21 +61,21 @@ jobs:
       run:
         working-directory: ./AJProds.EFDataSeeder/AJProds.EFDataSeeder.PostgreSql
     steps:
-      - uses: actions/checkout@v2.4.0
-      
+      - uses: actions/checkout@v3.3.0
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1.9.0
         with:
-          dotnet-version: '5.0'
-      
+          dotnet-version: '6.0'
+
       - name: Create NuGet Package
         run: dotnet pack -c Release --include-symbols /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/bandii/EFSeeder/releases/tag/${{ github.event.release.tag_name }}"
-      
+
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v2.2.4
         with:
           name: AJProds.EFDataSeeder.PostgreSql
           path: ./**/*.nupkg
-      
+
       - name: Publish Nuget Package
         run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY_POSTGRESQL }} --source https://api.nuget.org/v3/index.json

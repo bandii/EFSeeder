@@ -3,18 +3,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace AJProds.EFDataSeeder.Tests.Console
+namespace AJProds.EFDataSeeder.Tests.Console;
+
+/// <inheritdoc />
+public class TestDbContextFactory : IDesignTimeDbContextFactory<TestMSSQLDbContext>
 {
     /// <inheritdoc />
-    public class TestDbContextFactory : IDesignTimeDbContextFactory<TestMSSQLDbContext>
+    public TestMSSQLDbContext CreateDbContext(string[] args)
     {
-        /// <inheritdoc />
-        public TestMSSQLDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<TestMSSQLDbContext>();
-            optionsBuilder.UseSqlServer(Program.ConnectionMssqlTest);
+        var optionsBuilder = new DbContextOptionsBuilder<TestMSSQLDbContext>();
+        optionsBuilder.UseSqlServer(Program.ConnectionMssqlTest);
     
-            return new TestMSSQLDbContext(optionsBuilder.Options);
-        }
+        return new TestMSSQLDbContext(optionsBuilder.Options);
     }
 }

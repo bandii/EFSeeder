@@ -2,6 +2,6 @@ version: 2
 
 updates:
   - package-ecosystem: "nuget"
-    directory: "/AJProds.EFDataSeeder/AJProds.EFDataSeeder/"
+    directory: "/AJProds.EFDataSeeder/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
