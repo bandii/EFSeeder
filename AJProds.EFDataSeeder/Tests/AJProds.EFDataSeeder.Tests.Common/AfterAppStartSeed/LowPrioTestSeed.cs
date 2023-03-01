@@ -2,33 +2,32 @@
 
 using AJProds.EFDataSeeder.Core;
 
-namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed
+namespace AJProds.EFDataSeeder.Tests.Common.AfterAppStartSeed;
+
+public class LowPrioTestSeed: ISeed
 {
-    public class LowPrioTestSeed: ISeed
+    private readonly ITestContext _dbContext;
+
+    public int Priority => 100;
+
+    public string SeedName => "Low Prio seed";
+
+    public SeedMode Mode => SeedMode.AfterAppStart;
+
+    public bool AlwaysRun => false;
+
+    public LowPrioTestSeed(ITestContext dbContext)
     {
-        private readonly ITestContext _dbContext;
-
-        public int Priority => 100;
-
-        public string SeedName => "Low Prio seed";
-
-        public SeedMode Mode => SeedMode.AfterAppStart;
-
-        public bool AlwaysRun => false;
-
-        public LowPrioTestSeed(ITestContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        _dbContext = dbContext;
+    }
         
-        public async Task SeedAsync()
-        {
-            _dbContext.Testees.Add(new Testee
-                                   {
-                                       Description = "Low Prio seed"
-                                   });
+    public async Task SeedAsync()
+    {
+        _dbContext.Testees.Add(new Testee
+                               {
+                                   Description = "Low Prio seed"
+                               });
 
-            await _dbContext.SaveChangesAsync();
-        }
+        await _dbContext.SaveChangesAsync();
     }
 }

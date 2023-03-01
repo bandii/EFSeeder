@@ -9,89 +9,94 @@ using AJProds.EFDataSeeder.Core.Db;
 
 using Microsoft.Extensions.Logging;
 
-namespace AJProds.EFDataSeeder.Core
+namespace AJProds.EFDataSeeder.Core;
+
+public class BaseSeederManager
 {
-    public class BaseSeederManager
+    private readonly IEnumerable<ISeed> _seeders;
+
+    private readonly SeederDbContext _dbContext;
+
+    private readonly ILogger<BaseSeederManager> _logger;
+
+    public BaseSeederManager(IEnumerable<ISeed> seeders,
+                             SeederDbContext dbContext,
+                             ILogger<BaseSeederManager> logger)
     {
-        private readonly IEnumerable<ISeed> _seeders;
+        _seeders = seeders;
+        _dbContext = dbContext;
+        _logger = logger;
+    }
 
-        private readonly SeederDbContext _dbContext;
+    /// <summary>
+    /// Runs the <see cref="ISeed"/> implementations according to the <paramref name="when"/>
+    /// </summary>
+    /// <param name="when">When is this function get called?</param>
+    /// <param name="cts"><see cref="CancellationToken"/></param>
+    public virtual async Task SeedAsync(SeedMode when = SeedMode.None, CancellationToken cts = default)
+    {
+        using var startActivity = Telemetries.DefaultActivitySource?.StartActivity("Starting up seeders");
 
-        private readonly ILogger<BaseSeederManager> _logger;
+        startActivity?.AddEvent(new ActivityEvent("Seeding started for SeedMode: " + Enum.GetName(when)));
+        _logger.LogInformation("Seeding started");
 
-        public BaseSeederManager(IEnumerable<ISeed> seeders,
-                                 SeederDbContext dbContext,
-                                 ILogger<BaseSeederManager> logger)
+        var seedAlreadyRun = _dbContext.SeederHistories.ToList();
+
+        var seeds = _seeders
+                   .Where(seed => seed.Mode == when
+                               && (seed.AlwaysRun
+                                || seedAlreadyRun.All(history => history.SeedName != seed.SeedName)))
+                   .OrderBy(seed => seed.Priority)
+                   .ToList();
+
+        _logger.LogInformation("Seeding started with {SeedsCount} to be run", seeds.Count);
+        var meter = Telemetries.DefaultMeter?.CreateHistogram<float>("SeederDuration", unit: "ms");
+        foreach (var seeder in seeds)
         {
-            _seeders = seeders;
-            _dbContext = dbContext;
-            _logger = logger;
-        }
-
-        /// <summary>
-        /// Runs the <see cref="ISeed"/> implementations according to the <paramref name="when"/>
-        /// </summary>
-        /// <param name="when">When is this function get called?</param>
-        /// <param name="cts"><see cref="CancellationToken"/></param>
-        public virtual async Task SeedAsync(SeedMode when = SeedMode.None, CancellationToken cts = default)
-        {
-            using var startActivity = Telemetries.DefaultActivitySource?.StartActivity("Starting up seeders");
+            startActivity?.AddEvent(new ActivityEvent($"Seeding {seeder.SeedName}.."));
+            _logger.LogInformation("Seeding {SeederSeedName}..", seeder.SeedName);
             
-            startActivity?.AddEvent(new ActivityEvent("Seeding started for SeedMode: " + Enum.GetName(when)));
-            _logger.LogInformation("Seeding started");
+            var stopwatch = Stopwatch.StartNew();
 
-            var seedAlreadyRun = _dbContext.SeederHistories.ToList();
+            await seeder.SeedAsync();
+            await SaveHistoryLog(seeder, seedAlreadyRun);
 
-            var seeds = _seeders
-                       .Where(seed => seed.Mode == when
-                                   && (seed.AlwaysRun
-                                    || seedAlreadyRun.All(history => history.SeedName != seed.SeedName)))
-                       .OrderBy(seed => seed.Priority)
-                       .ToList();
-
-            _logger.LogInformation("Seeding started with {SeedsCount} to be run", seeds.Count);
-            foreach (var seeder in seeds)
+            if (cts.IsCancellationRequested)
             {
-                startActivity?.AddEvent(new ActivityEvent($"Seeding {seeder.SeedName}.."));
-                _logger.LogInformation("Seeding {SeederSeedName}..", seeder.SeedName);
-                
-                await seeder.SeedAsync();
-                await SaveHistoryLog(seeder, seedAlreadyRun);
-                
-                if (cts.IsCancellationRequested)
-                {
-                    break;
-                }
+                break;
             }
-        }
 
-        private async Task SaveHistoryLog(ISeed seeder, IReadOnlyCollection<SeederHistory> seedAlreadyRun)
+            meter?.Record(stopwatch.ElapsedMilliseconds,
+                          tag: KeyValuePair.Create<string, object>("SeedName", seeder.SeedName));
+        }
+    }
+
+    private async Task SaveHistoryLog(ISeed seeder, IReadOnlyCollection<SeederHistory> seedAlreadyRun)
+    {
+        var now = DateTime.Now.ToUniversalTime();
+
+        // One-time run == insert
+        if (!seeder.AlwaysRun
+         || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
         {
-            var now = DateTime.Now;
-            
-            // One-time run == insert
-            if (!seeder.AlwaysRun
-             || (seeder.AlwaysRun && seedAlreadyRun.All(history => history.SeedName != seeder.SeedName)))
-            {
-                _dbContext.SeederHistories.Add(new SeederHistory
-                                               {
-                                                   SeedName = seeder.SeedName,
-                                                   AlwaysRun = seeder.AlwaysRun,
-                                                   FirstRunAt = now,
-                                                   LastRunAt = now
-                                               });
-            }
-            else
-            {
-                var seederHistory = seedAlreadyRun
-                   .Single(history => history.SeedName == seeder.SeedName);
-
-                seederHistory.SeedName = seeder.SeedName;
-                seederHistory.AlwaysRun = seeder.AlwaysRun;
-                seederHistory.LastRunAt = now;
-            }
-
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SeederHistories.Add(new SeederHistory
+                                           {
+                                               SeedName = seeder.SeedName,
+                                               AlwaysRun = seeder.AlwaysRun,
+                                               FirstRunAt = now,
+                                               LastRunAt = now
+                                           });
         }
+        else
+        {
+            var seederHistory = seedAlreadyRun
+               .Single(history => history.SeedName == seeder.SeedName);
+
+            seederHistory.SeedName = seeder.SeedName;
+            seederHistory.AlwaysRun = seeder.AlwaysRun;
+            seederHistory.LastRunAt = now;
+        }
+
+        await _dbContext.SaveChangesAsync();
     }
 }
