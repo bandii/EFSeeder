@@ -10,6 +10,8 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageTags>Seed;EF;EF Core;Entity Framework;Data;Start;.NET;.NET Core;dotnet</PackageTags>
         <RootNamespace>AJProds.EFDataSeeder.PostgreSql</RootNamespace>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
