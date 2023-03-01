@@ -12,7 +12,7 @@ public class TestDbContextFactory : IDesignTimeDbContextFactory<TestMSSQLDbConte
     public TestMSSQLDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<TestMSSQLDbContext>();
-        optionsBuilder.UseSqlServer(Program.ConnectionMssqlTest);
+        optionsBuilder.UseSqlServer(Constants.ConnectionMssqlTest);
     
         return new TestMSSQLDbContext(optionsBuilder.Options);
     }
