@@ -130,7 +130,3 @@ will run in the background, in an `IHostedService`.
 ### ISeed.RunAlways => true
 You can re-run the `ISeed` procedures every time, when the application starts up.
 Simply set the `RunAlways` property to true in your `ISeed` implementation.
-
-# TODO
-- [ ] Bump versions to LTS -> NET 6
-- [ ] Add UI in a new project?
