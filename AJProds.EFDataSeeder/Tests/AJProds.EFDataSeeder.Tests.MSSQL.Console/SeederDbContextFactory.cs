@@ -12,7 +12,7 @@ public class SeederDbContextFactory : IDesignTimeDbContextFactory<SeederDbContex
     public SeederDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<SeederDbContext>();
-        optionsBuilder.UseSqlServer(Program.ConnectionMssqlTest, 
+        optionsBuilder.UseSqlServer(Constants.ConnectionMssqlTest, 
                                     x => x.MigrationsAssembly(typeof(MsSql.Extensions).Assembly.FullName));
 
         return new SeederDbContext(optionsBuilder.Options);
